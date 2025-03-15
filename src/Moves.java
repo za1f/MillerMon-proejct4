@@ -18,4 +18,16 @@ public class Moves {
     public int getMaxpp() {
         return maxpp;
     }
+
+    public void setPp(int pp) {
+        this.pp = pp;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPp() {
+        return pp;
+    }
 }
