@@ -28,21 +28,21 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkup1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkup2.png"));
-            up3 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkup3.png"));
-            up4 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkup4.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkup1.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkup2.png"));
+            up3 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkup3.png"));
+            up4 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkup4.png"));
 
-            down1 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkdown1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkdown2.png"));
-            down3 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkdown3.png"));
-            down4 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkdown4.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkdown1.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkdown2.png"));
+            down3 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkdown3.png"));
+            down4 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkdown4.png"));
 
-            left1 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkleft1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkleft2.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkleft1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkleft2.png"));
 
-            right1 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkright1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/res/player/playerwalkright2.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkright1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/player/playerwalkright2.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,20 +50,48 @@ public class Player extends Entity {
     }
 
     public void update() {
-        if (keyH.upPressed) {
-            direction = "up";
-            y -= speed;
-        } else if (keyH.downPressed) {
-            direction = "down";
-            y += speed;
+
+        if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true){
+            if (keyH.upPressed) {
+                direction = "up";
+                y -= speed;
+            } else if (keyH.downPressed) {
+                direction = "down";
+                y += speed;
+            }
+            else if (keyH.leftPressed) {
+                direction = "left";
+                x -= speed;
+            } else if (keyH.rightPressed) {
+                direction = "right";
+                x += speed;
+            }
+
+            spriteCounter++;
+
+            if (spriteCounter > 12){
+                if (spriteNum ==1){
+                    spriteNum = 2;
+                }
+                else if (spriteNum == 2){
+                    spriteNum = 3;
+                } else if (spriteNum ==3) {
+                    spriteNum = 4;
+                }
+                else if (spriteNum == 4){
+                    spriteNum = 1;
+                }
+
+                if(horizon == 1){
+                    horizon = 2;
+                } else if (horizon == 2){
+                    horizon = 1;
+                }
+                spriteCounter = 0;
+            }
         }
-        if (keyH.leftPressed) {
-            direction = "left";
-            x -= speed;
-        } else if (keyH.rightPressed) {
-            direction = "right";
-            x += speed;
-        }
+
+
     }
 
     public void draw(Graphics2D g2) {
@@ -71,16 +99,50 @@ public class Player extends Entity {
 
         switch (direction) {
             case "up":
-                image = up1;
+                if (spriteNum == 1){
+                    image = up1;
+                }
+                if(spriteNum == 2){
+                    image = up2;
+                }
+                if(spriteNum == 3){
+                    image = up3;
+                }
+                if(spriteNum == 4){
+                    image = up4;
+                }
+
                 break;
             case "down":
-                image = down1;
+                if(spriteNum == 1){
+                    image = down1;
+                }
+                if(spriteNum == 2){
+                    image = down2;
+                }
+                if(spriteNum == 3){
+                    image = down3;
+                }
+                if(spriteNum == 4){
+                    image = down4;
+                }
+
                 break;
             case "left":
-                image = left1;
+                if(horizon == 1){
+                    image = left1;
+                }
+                if(horizon == 2){
+                    image = left2;
+                }
                 break;
             case "right":
-                image = right1;
+                if(horizon == 1){
+                    image = right1;
+                }
+                if(horizon == 2){
+                    image = right2;
+                }
                 break;
         }
         g2.drawImage(image, x, y, 48, 48, null);
