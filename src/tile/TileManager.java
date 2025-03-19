@@ -9,8 +9,8 @@ import java.io.*;
 public class TileManager {
 
     GamePanel gp;
-    Tile[] tile;
-    int mapTileNum[][];
+    public Tile[] tile;
+    public int mapTileNum[][];
 
 
     public TileManager(GamePanel gp){
@@ -39,6 +39,11 @@ public class TileManager {
                 file = "/tiles/town1REAL_" + zeros + i + ".png";
                 tile[i] = new Tile();
                 tile[i].image = ImageIO.read(getClass().getResourceAsStream(file));
+                if (i == 4 || i == 88 || i == 87|| i == 85|| i == 78|| i == 84|| i == 83|| i == 82|| i == 104|| i == 105|| i == 108|| i == 110|| i == 112|| i == 113|| i == 116|| i == 115|| i == 96|| i == 95|| i == 94|| i == 93|| i == 92|| i == 91|| i == 90|| i == 89|| i == 102|| i == 103|| i == 42|| i == 43|| i == 44|| i == 45|| i == 46|| i == 47|| i == 59|| i == 49|| i == 50|| i == 51|| i == 52|| i == 37|| i == 3|| i == 9|| i == 28|| i == 36|| i == 26|| i == 25|| i == 24|| i == 23|| i == 22|| i == 21|| i == 19|| i == 18|| i == 15|| i == 14|| i == 12|| i == 11|| i == 10 )
+
+                {
+                    tile[i].collison = true;
+                }
             }
 
 
