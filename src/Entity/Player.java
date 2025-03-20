@@ -24,7 +24,7 @@ public class Player extends Entity {
 
         solidArea = new Rectangle();
         solidArea.x = 6;
-        solidArea.y = 14;
+        solidArea.y = 12;
         solidArea.width = 30;
         solidArea.height = 30;
 
