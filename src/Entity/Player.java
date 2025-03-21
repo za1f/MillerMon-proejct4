@@ -25,6 +25,8 @@ public class Player extends Entity {
         solidArea = new Rectangle();
         solidArea.x = 6;
         solidArea.y = 12;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         solidArea.width = 30;
         solidArea.height = 30;
 
@@ -79,6 +81,10 @@ public class Player extends Entity {
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
+            //check obj collision
+            int objIndex = gp.cChecker.checkObj(this, true);
+            pickUpPoke(objIndex);
+
             // IF COLLISION IS FALSE, PLAYER CAN MOVE!!!
             if (collisionOn == false){
                 switch (direction){
@@ -120,8 +126,23 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
+    }
 
+    public void pickUpPoke (int i){
+        if (i != 999){
+            String objName = gp.obj[i].name;
 
+            switch (objName){
+                case "PokeballCHEAT":
+                    System.out.println("You've put the CHEAT ITEM into your bag.");
+                    gp.obj[i]=null;
+                    break;
+                case "Pokeball1":
+                    System.out.println("You've put an item into your bag.");
+                    gp.obj[i]=null;
+                    break;
+            }
+        }
     }
 
     public void draw(Graphics2D g2) {
