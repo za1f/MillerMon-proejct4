@@ -19,7 +19,7 @@ public class Entity {
     public int spriteNum = 1;
     public int horizon = 1;
 
-    public Rectangle solidArea = new Rectangle(0,0,48,48);
+    public Rectangle solidArea = new Rectangle(0,0,40,40);
     public int solidAreaDefaultX, solidAreaDefaultY;
 
     public boolean collisionOn = false;
