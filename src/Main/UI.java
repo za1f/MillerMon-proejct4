@@ -14,7 +14,7 @@ public class UI {
 
     public UI(GamePanel gp){
         this.gp = gp;
-        PKMNRBYGSC40 = new Font("PKMN RBYGSC", Font.PLAIN, 40);
+        PKMNRBYGSC40 = new Font("PKMN RBYGSC", Font.PLAIN, 80);
     }
 
     public void draw(Graphics2D g2){

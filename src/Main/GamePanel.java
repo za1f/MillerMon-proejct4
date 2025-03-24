@@ -2,6 +2,7 @@ package Main;
 
 import Entity.Entity;
 import Entity.Player;
+import jdk.jfr.Event;
 import object.SuperObject;
 import tile.TileManager;
 
@@ -107,6 +108,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void update(){
 
         if (gameState == playState){
+
             //player
             player.update();
             //npc
@@ -169,11 +171,19 @@ public class GamePanel extends JPanel implements Runnable {
         music.play();
         music.loop();
     }
+
+    public void pauseMusic(){
+        music.play();
+        music.loop();
+    }
+
     public void stopMusic(){
         music.stop();
     }
+
     public void playSE(int i){
         se.setFile(i);
         se.play();
     }
+
 }
