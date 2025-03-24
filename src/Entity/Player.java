@@ -9,14 +9,15 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Player extends Entity {
-    GamePanel gp;
+
     KeyHandler keyH;
 
     public int screenX;
     public int screenY;
+    int standCounter = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
-        this.gp = gp;
+        super(gp);
         this.keyH = keyH;
 
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
@@ -84,6 +85,10 @@ public class Player extends Entity {
             //check obj collision
             int objIndex = gp.cChecker.checkObj(this, true);
             pickUpPoke(objIndex);
+            //Check nps collision
+
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+            interactNPC(npcIndex);
 
             // IF COLLISION IS FALSE, PLAYER CAN MOVE!!!
             if (collisionOn == false){
@@ -126,22 +131,25 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
+        else {
+            standCounter++;
+            if (standCounter == 20){
+                spriteNum = 1;
+                standCounter = 0;
+            }
+
+        }
     }
 
     public void pickUpPoke (int i){
         if (i != 999){
-            String objName = gp.obj[i].name;
 
-            switch (objName){
-                case "PokeballCHEAT":
-                    System.out.println("You've put the CHEAT ITEM into your bag.");
-                    gp.obj[i]=null;
-                    break;
-                case "Pokeball1":
-                    System.out.println("You've put an item into your bag.");
-                    gp.obj[i]=null;
-                    break;
-            }
+        }
+    }
+
+    public void interactNPC(int i){
+        if (i != 999){
+
         }
     }
 
