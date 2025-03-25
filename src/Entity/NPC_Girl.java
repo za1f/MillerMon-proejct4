@@ -46,6 +46,7 @@ public class NPC_Girl extends Entity{
         dialogues[2] = "The  building  with  the  gray  roof  is \n Professor  Hazel's  lab.";
         dialogues[3] = "That  red  one  is  the  PokeCenter.";
         dialogues[4] = "And  that  blue  one  is  the  PokeShop.";
+        dialogues[5] = "Now get lost loser.";
     }
     public void setAction(){
 
