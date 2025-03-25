@@ -11,9 +11,10 @@ public class NPC_Girl extends Entity{
         super(gp);
 
         direction = "down";
-        speed = 3;
+        speed = 2;
 
         getGirlImage();
+        setDialogue();
     }
 
     public void getGirlImage() {
@@ -39,6 +40,13 @@ public class NPC_Girl extends Entity{
         }
     }
 
+    public void setDialogue(){
+        dialogues[0] = "Hey  there  hot  stuff.";
+        dialogues[1] = "Oh,  you  want  to  know  about  this  town?";
+        dialogues[2] = "The  building  with  the  gray  roof  is \n Professor  Hazel's  lab.";
+        dialogues[3] = "That  red  one  is  the  PokeCenter.";
+        dialogues[4] = "And  that  blue  one  is  the  PokeShop.";
+    }
     public void setAction(){
 
         actionLockCounter++;
@@ -63,5 +71,9 @@ public class NPC_Girl extends Entity{
         }
 
     }
+    public void speak(){
+        super.speak();
+    }
+
 
 }

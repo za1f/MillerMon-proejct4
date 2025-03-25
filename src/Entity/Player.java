@@ -67,7 +67,7 @@ public class Player extends Entity {
 
     public void update() {
 
-        if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true){
+        if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true){
             if (keyH.upPressed) {
                 direction = "up";
             } else if (keyH.downPressed) {
@@ -85,13 +85,13 @@ public class Player extends Entity {
             //check obj collision
             int objIndex = gp.cChecker.checkObj(this, true);
             pickUpPoke(objIndex);
-            //Check nps collision
+            //Check npc collision
 
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
             // IF COLLISION IS FALSE, PLAYER CAN MOVE!!!
-            if (collisionOn == false){
+            if (collisionOn == false && keyH.enterPressed == false){
                 switch (direction){
                     case "up":
                         worldY -= speed;
@@ -107,6 +107,8 @@ public class Player extends Entity {
                         break;
                 }
             }
+
+            gp.keyH.enterPressed = false;
 
             spriteCounter++;
 
@@ -149,7 +151,11 @@ public class Player extends Entity {
 
     public void interactNPC(int i){
         if (i != 999){
-
+            if (gp.keyH.enterPressed == true){
+                gp.gameState = gp.dialogueState;
+                gp.npc[i].speak();
+            }
+            gp.keyH.enterPressed = false;
         }
     }
 
