@@ -1,8 +1,11 @@
 package Main;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 public class UI {
 
@@ -14,6 +17,7 @@ public class UI {
     public String message = "";
     int messageCounter = 0;
     public String currentDialogue = "";
+    public int commandNum = 0;
 
     public UI(GamePanel gp){
         this.gp = gp;
@@ -32,6 +36,13 @@ public class UI {
         this.g2 = g2;
         g2.setFont(fontGame);
         g2.setColor(Color.white);
+
+        //title state
+        if (gp.gameState == gp.titleState){
+            drawTitleScreen();
+        }
+
+        //play state
         if (gp.gameState == gp.playState){
             //do playstate stuff
         }
@@ -42,6 +53,87 @@ public class UI {
         if(gp.gameState == gp.dialogueState){
             drawDialogueScreen();
         }
+
+    }
+
+    public void drawTitleScreen(){
+        String text;
+        int x;
+        int y = gp.tileSize*3;
+        y += gp.tileSize*2;
+        try {
+            g2.drawImage(ImageIO.read(getClass().getResourceAsStream("/titleScreen/titleScreen.png")), 0, 0, 768, 576, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //menu
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,36F));
+
+        text = "NEW  GAME";
+        x = getXForCenteredText(text);
+        y += gp.tileSize * 2;
+        g2.setColor(Color.gray);
+        g2.drawString(text,x+3,y+3);
+        g2.setColor(Color.white);
+        g2.drawString(text,x,y);
+        if (commandNum == 0){
+            g2.setColor(Color.gray);
+            g2.drawString("   [", x-gp.tileSize+3, y+3);
+            g2.setColor(Color.white);
+            g2.drawString("   [", x-gp.tileSize, y);
+            g2.setColor(Color.gray);
+            g2.drawString("]", x+gp.tileSize*6+3, y+3);
+            g2.setColor(Color.white);
+            g2.drawString("]", x+gp.tileSize*6, y);
+        }
+
+        text = "LOAD  GAME";
+        x = getXForCenteredText(text);
+        y += gp.tileSize;
+        g2.setColor(Color.gray);
+        g2.drawString(text,x+3,y+3);
+        g2.setColor(Color.white);
+        g2.drawString(text,x,y);
+        if (commandNum == 1){
+            g2.setColor(Color.gray);
+            g2.drawString("   [", x-gp.tileSize+3 , y+3);
+            g2.setColor(Color.white);
+            g2.drawString("   [", x-gp.tileSize, y);
+            g2.setColor(Color.gray);
+            g2.drawString("]", x+gp.tileSize*7+3 - 10, y+3);
+            g2.setColor(Color.white);
+            g2.drawString("]", x+gp.tileSize*7 - 10, y);
+        }
+
+        text = "QUIT";
+        x = getXForCenteredText(text);
+        y += gp.tileSize;
+        g2.setColor(Color.gray);
+        g2.drawString(text,x+3,y+3);
+        g2.setColor(Color.white);
+        g2.drawString(text,x,y);
+        if (commandNum == 2){
+            g2.setColor(Color.gray);
+            g2.drawString("   [", x-gp.tileSize+3, y+3);
+            g2.setColor(Color.white);
+            g2.drawString("   [", x-gp.tileSize, y);
+            g2.setColor(Color.gray);
+            g2.drawString("]", x+gp.tileSize*3+3, y+3);
+            g2.setColor(Color.white);
+            g2.drawString("]", x+gp.tileSize*3, y);
+        }
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,20F));
+        text = "(c) 2025  ZAIF'S  PROJECT  4  inc.";
+        x = getXForCenteredText(text);
+        y += gp.tileSize*3 - 10;
+        g2.setColor(Color.gray);
+        g2.drawString(text,x+3,y+3);
+        g2.setColor(new Color(240, 240,240));
+        g2.drawString(text,x,y);
+
+
+
 
     }
 

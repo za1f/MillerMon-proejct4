@@ -25,6 +25,8 @@ public class GamePanel extends JPanel implements Runnable {
     //world settings
     public final int maxWorldCol = 24;
     public final int maxWorldRow = 20;
+    public final int maxMap = 20;
+    public int currentMap = 1;
     //public final int worldWidth = tileSize * maxWorldCol;
     //public final int worldHeight = tileSize * maxWorldRow;
 
@@ -39,16 +41,18 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
+    public EventHandler eHandler = new EventHandler(this);
 
     Thread gameThread;
 
     // entity + objects
     public Player player = new Player(this, keyH);
-    public SuperObject obj[] = new SuperObject[10];
-    public Entity npc[] = new Entity[10];
+    public SuperObject obj[][] = new SuperObject[maxMap][10];
+    public Entity npc[][] = new Entity[maxMap][10];
 
     //game state
     public int gameState;
+    public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
@@ -66,8 +70,8 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame(){
         aSetter.setObject();
         aSetter.setNPC();
-        playMusic(1);
-        gameState = playState;
+        playMusic(2);
+        gameState = titleState;
     }
 
     public void startGameThread(){
@@ -113,9 +117,9 @@ public class GamePanel extends JPanel implements Runnable {
             //player
             player.update();
             //npc
-            for (int i = 0; i < npc.length; i++){
-                if (npc[i] != null){
-                    npc[i].update();
+            for (int i = 0; i < npc[1].length; i++){
+                if (npc[currentMap][i] != null){
+                    npc[currentMap][i].update();
                 }
             }
         }
@@ -136,25 +140,35 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 
-
-        tileM.draw(g2);
-
-        for (int i = 0; i < obj.length; i++){
-            if (obj[i] != null){
-                obj[i].draw(g2, this);
-            }
+        //TITLE SCREEN
+        if (gameState == titleState){
+            ui.draw(g2);
         }
-        //NPc
-        for (int i = 0; i < npc.length; i++){
-            if (npc[i] != null){
-                npc[i].draw(g2);
+        //OTHER STUFF
+        else {
+            //TILE
+            tileM.draw(g2);
+
+            for (int i = 0; i < obj[1].length; i++){
+                if (obj[currentMap][i] != null){
+                    obj[currentMap][i].draw(g2, this);
+                }
             }
+            //NPc
+            for (int i = 0; i < npc[1].length; i++){
+                if (npc[currentMap][i] != null){
+                    npc[currentMap][i].draw(g2);
+                }
+            }
+
+            //Player
+            player.draw(g2);
+            //UI
+            ui.draw(g2);
         }
 
-        //Player
-        player.draw(g2);
-        //UI
-        ui.draw(g2);
+
+
 
         if (keyH.checkDrawTime == true){
             long drawEnd = System.nanoTime();

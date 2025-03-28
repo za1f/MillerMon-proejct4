@@ -15,12 +15,13 @@ public class AssetSetter {
 
 
     public void setObject(){
-
+        int mapNum = 0;
     }
     public void setNPC(){
-        gp.npc[0] = new NPC_Girl(gp);
-        gp.npc[0].worldX = gp.tileSize * 10;
-        gp.npc[0].worldY = gp.tileSize * 7;
+        int mapNum = 0;
+        gp.npc[mapNum][0] = new NPC_Girl(gp);
+        gp.npc[mapNum][0].worldX = gp.tileSize * 10;
+        gp.npc[mapNum][0].worldY = gp.tileSize * 7;
     }
 
 }

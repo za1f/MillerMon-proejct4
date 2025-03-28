@@ -1,5 +1,7 @@
 package Main;
 
+import tile.TileManager;
+
 import javax.swing.JFrame;
 //main class btw
 public class Test {
@@ -19,5 +21,6 @@ public class Test {
 
         gamePanel.setupGame();
         gamePanel.startGameThread();
+
     }
 }

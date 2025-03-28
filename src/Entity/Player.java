@@ -36,8 +36,14 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 9;
-        worldY = gp.tileSize * 7;
+        if (gp.currentMap == 1){
+            worldX = gp.tileSize * 7;
+            worldY = gp.tileSize * 13;
+        } else if (gp.currentMap == 0){
+            worldX = gp.tileSize * 9;
+            worldY = gp.tileSize * 7;
+        }
+
         speed = 4;
         direction = "down";
     }
@@ -89,6 +95,8 @@ public class Player extends Entity {
 
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
+            //check event
+            gp.eHandler.checkEvent();
 
             // IF COLLISION IS FALSE, PLAYER CAN MOVE!!!
             if (collisionOn == false && keyH.enterPressed == false){
@@ -153,7 +161,7 @@ public class Player extends Entity {
         if (i != 999){
             if (gp.keyH.enterPressed == true){
                 gp.gameState = gp.dialogueState;
-                gp.npc[i].speak();
+                gp.npc[gp.currentMap][i].speak();
             }
             gp.keyH.enterPressed = false;
         }
