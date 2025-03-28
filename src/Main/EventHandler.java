@@ -49,11 +49,11 @@ public class EventHandler {
         }
         if (canTouchEvent == true){
             if (hit(0,8,5,"any") == true){
-                teleport(1,16,9);
+                teleport(1,15,9);
                 gp.stopMusic();
                 gp.playMusic(3);
             }
-            else if (hit(1,16,9,"any") == true) {
+            else if (hit(1,16,9,"any") == true || hit(1,17,9,"any") == true || hit(1,16,8,"any") == true || hit(1,17,8,"any") == true ){
                 teleport(0,8,5);
                 gp.stopMusic();
                 gp.playMusic(1);
