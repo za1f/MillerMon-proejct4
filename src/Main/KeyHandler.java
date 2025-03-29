@@ -25,12 +25,14 @@ public class KeyHandler implements KeyListener {
         if (gp.gameState == gp.titleState){
             if(code == KeyEvent.VK_W){
                 gp.ui.commandNum--;
+                gp.playSE(4);
                 if (gp.ui.commandNum < 0){
                     gp.ui.commandNum = 2;
                 }
             }
             if(code == KeyEvent.VK_S){
                 gp.ui.commandNum++;
+                gp.playSE(4);
                 if (gp.ui.commandNum > 2){
                     gp.ui.commandNum = 0;
                 }
@@ -39,6 +41,7 @@ public class KeyHandler implements KeyListener {
                 if (gp.ui.commandNum == 0){
                     gp.gameState = gp.playState;
                     gp.stopMusic();
+                    gp.playSE(5);
                     gp.playMusic(3);
                 }
                 if (gp.ui.commandNum == 1) {

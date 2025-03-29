@@ -7,11 +7,14 @@ import java.io.IOException;
 import java.util.Random;
 
 public class NPC_Girl extends Entity{
+
+    int count = 0;
     public NPC_Girl(GamePanel gp){
         super(gp);
 
         direction = "down";
         speed = 2;
+
 
         getGirlImage();
         setDialogue();
@@ -74,6 +77,27 @@ public class NPC_Girl extends Entity{
     }
     public void speak(){
         super.speak();
+        if (count == 0){
+            gp.stopSE();
+            gp.playSE(6);
+            count++;
+        }else if (count == 1){
+            gp.stopSE();
+            gp.playSE(6);
+            count++;
+        } else if (count == 2){
+            gp.stopSE();
+            gp.playSE(7);
+            count++;
+        } else if (count == 3 || count == 4){
+            gp.stopSE();
+            gp.playSE(7);
+            count++;
+        } else {
+            gp.stopSE();
+            gp.playSE(6);
+            count = 0;
+        }
     }
 
 

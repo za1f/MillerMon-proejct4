@@ -17,6 +17,10 @@ Sound {
         soundURL[1] = getClass().getResource("/sound/town1music.wav");
         soundURL[2] = getClass().getResource("/sound/titleMusic1.wav");
         soundURL[3] = getClass().getResource("/sound/homeMusic.wav");
+        soundURL[4] = getClass().getResource("/sound/menuScroll.wav");
+        soundURL[5] = getClass().getResource("/sound/select.wav");
+        soundURL[6] = getClass().getResource("/sound/girlSpeak.wav");
+        soundURL[7] = getClass().getResource("/sound/girlSpeak1.wav");
     }
 
     public void setFile(int i){
