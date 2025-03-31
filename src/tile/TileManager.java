@@ -18,12 +18,12 @@ public class TileManager {
     public TileManager(GamePanel gp){
 
         this.gp = gp;
-        tile = new Tile[156];
+        tile = new Tile[300];
         mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
-        loadMap("/maps/town1.txt", 0);
-        loadMap("/maps/startRoom.txt",1);
-
+        loadMap(0, "/maps/town1.txt");
+        loadMap(2, "/maps/lab.txt");
+        loadMap(1, "/maps/startRoom.txt");
     }
 
     public void getTileImage(){
@@ -69,6 +69,26 @@ public class TileManager {
 
             }
 
+            for (int i = 156; i < 215; i++){
+                String file;
+                String zeros;
+                if (i < 165){
+                    zeros = "0";
+                } else {
+                    zeros = "";
+                }
+
+                file = "/labTiles/lab_" + zeros + (i - 155) + ".png";
+
+                tile[i] = new Tile();
+                tile[i].image = ImageIO.read(getClass().getResourceAsStream(file));
+                if (i == 163 || i == 160 || i == 213 || i == 209 || i == 208 || i == 206 || i == 214 || i == 204 || i == 203 || i == 202 || i == 199 || i == 211 || i == 164 || i == 165 || i == 167 || i == 168 || i == 170 || i == 171 || i == 181 || i == 182 || i == 183 || i == 184 || i == 185 || i == 186 || i == 205 || i == 172 || i == 173 || i == 174 || i == 175 || i == 176 || i == 177 || i == 178 || i == 179 || i == 200 || i == 201 || i == 166)
+                {
+                    tile[i].collison = true;
+                }
+
+            }
+
 
 
 
@@ -81,7 +101,8 @@ public class TileManager {
 
     }
 
-    public void loadMap(String filePath, int map){
+    public void loadMap(int map, String filePath){
+        gp.currentMap = map;
         try {
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -92,10 +113,18 @@ public class TileManager {
                 while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
                     String line = br.readLine();
                     while (col < gp.maxWorldCol) {
+
                         String numbers[] = line.split(",");
+                        if (gp.currentMap == 0 && map == gp.currentMap) {
                             helper = 0;
+                        } else
                         if (gp.currentMap == 1 && map == gp.currentMap){
                             helper = 116;
+                        } else
+                        if (gp.currentMap == 2 && map == gp.currentMap){
+                            helper = 155;
+                        } else {
+
                         }
                         int num = Integer.parseInt(numbers[col]);
                         mapTileNum[map][col][row] = num + helper;

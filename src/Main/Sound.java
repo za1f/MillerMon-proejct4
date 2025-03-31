@@ -21,6 +21,7 @@ Sound {
         soundURL[5] = getClass().getResource("/sound/select.wav");
         soundURL[6] = getClass().getResource("/sound/girlSpeak.wav");
         soundURL[7] = getClass().getResource("/sound/girlSpeak1.wav");
+        soundURL[8] = getClass().getResource("/sound/lab.wav");
     }
 
     public void setFile(int i){

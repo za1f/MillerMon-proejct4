@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int tileSize = originalTileSize * scale; // its 48 the ACTUAL tile size
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
-    public final int screenWidth = tileSize * maxScreenCol; //960 pix
+    public final int screenWidth = tileSize * maxScreenCol; //768 pix
     public final int screenHeight = tileSize * maxScreenRow;//576 pix
 
     //world settings
@@ -58,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dialogueState = 3;
 
 
-    Color color = new Color(171,222,98);  //171,222,98)
+    Color color = new Color(66,66,66);  //171,222,98)
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(color);

@@ -2,6 +2,8 @@ package Main;
 import jdk.jfr.Event;
 import tile.TileManager;
 
+import java.awt.*;
+
 
 public class EventHandler {
     GamePanel gp;
@@ -49,15 +51,33 @@ public class EventHandler {
         }
         if (canTouchEvent == true){
             if (hit(0,8,5,"any") == true){
+                Color color = new Color(66,66,66);
+                gp.setBackground(color);
                 teleport(1,15,9);
                 gp.stopMusic();
                 gp.playMusic(3);
             }
             else if (hit(1,16,9,"any") == true || hit(1,17,9,"any") == true || hit(1,16,8,"any") == true || hit(1,17,8,"any") == true ){
+                Color color = new Color(171,222,98);
+                gp.setBackground(color);
                 teleport(0,8,5);
                 gp.stopMusic();
                 gp.playMusic(1);
+            } else if (hit(0,17,5,"any") == true){
+                Color color = new Color(66,66,66);
+                gp.setBackground(color);
+                teleport(2,11, 15);
+                gp.stopMusic();
+                gp.playMusic(8);
+            } else if (hit(2,11,15,"any") == true || hit(2, 12, 15, "any") == true){
+                Color color = new Color(171,222,98);
+                gp.setBackground(color);
+                teleport(0,17, 5);
+                gp.stopMusic();
+                gp.playMusic(1);
             }
+
+
 
         }
 

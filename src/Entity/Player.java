@@ -42,6 +42,9 @@ public class Player extends Entity {
         } else if (gp.currentMap == 0){
             worldX = gp.tileSize * 9;
             worldY = gp.tileSize * 7;
+        } else if (gp.currentMap == 2) {
+            worldX = gp.tileSize * 10;
+            worldY = gp.tileSize * 10;
         }
 
         speed = 4;
