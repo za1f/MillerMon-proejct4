@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
     TileManager tileM = new TileManager(this);
+    int map2 = tileM.map1;
 
     public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
@@ -56,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
+    public final int transitionState = 4;
 
 
     Color color = new Color(66,66,66);  //171,222,98)
@@ -91,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable {
         int drawCount = 0;
 
         while(gameThread != null) {
+            map2 = tileM.map1;
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
             timer+= currentTime - lastTime;
@@ -112,6 +115,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void update(){
 
+
         if (gameState == playState){
 
             //player
@@ -129,8 +133,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void paintComponent(Graphics g){
-        super.paintComponent(g); //parent class Jpanel
-        Graphics2D g2 = (Graphics2D) g; //change g to Graphics 2d bc it has more functions
+        super.paintComponent(g); //parent class JPanel
+        Graphics2D g2 = (Graphics2D) g;
         //debug
 
         long drawStart = 0;
@@ -154,7 +158,7 @@ public class GamePanel extends JPanel implements Runnable {
                     obj[currentMap][i].draw(g2, this);
                 }
             }
-            //NPc
+            //NPC
             for (int i = 0; i < npc[1].length; i++){
                 if (npc[currentMap][i] != null){
                     npc[currentMap][i].draw(g2);

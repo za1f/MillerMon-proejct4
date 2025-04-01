@@ -8,6 +8,7 @@ import java.io.*;
 
 public class TileManager {
 
+    public int map1;
     public int helper;
     GamePanel gp;
     public Tile[] tile;
@@ -18,12 +19,14 @@ public class TileManager {
     public TileManager(GamePanel gp){
 
         this.gp = gp;
-        tile = new Tile[300];
+        tile = new Tile[268];
         mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
         loadMap(0, "/maps/town1.txt");
         loadMap(2, "/maps/lab.txt");
+        loadMap(3, "/maps/pokeCenter.txt");
         loadMap(1, "/maps/startRoom.txt");
+
     }
 
     public void getTileImage(){
@@ -89,6 +92,26 @@ public class TileManager {
 
             }
 
+            for (int i = 215; i < 268; i++){
+                String file;
+                String zeros;
+                if (i < 224){
+                    zeros = "0";
+                } else {
+                    zeros = "";
+                }
+
+                file = "/pokeCenterTiles/pokecenter_" + zeros + (i - 214) + ".png";
+
+                tile[i] = new Tile();
+                tile[i].image = ImageIO.read(getClass().getResourceAsStream(file));
+                if (i == 215 || i == 217 || i == 218 || i == 219 || i == 220 || i == 221 || i == 222 || i == 244 || i == 243 || i == 242 || i == 245 || i == 246 || i == 247 || i == 248 || i == 249 || i == 250 || i == 251 || i == 252 || i == 253 || i == 260 || i == 237 || i == 259)
+                {
+                    tile[i].collison = true;
+                }
+
+            }
+
 
 
 
@@ -102,11 +125,12 @@ public class TileManager {
     }
 
     public void loadMap(int map, String filePath){
+        map1 = map;
         gp.currentMap = map;
+
         try {
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
 
             int col = 0;
             int row = 0;
@@ -114,18 +138,29 @@ public class TileManager {
                     String line = br.readLine();
                     while (col < gp.maxWorldCol) {
 
+
                         String numbers[] = line.split(",");
                         if (gp.currentMap == 0 && map == gp.currentMap) {
                             helper = 0;
+                            System.out.println(filePath + ": map loaded");
+                            System.out.println("map:" + map);
                         } else
                         if (gp.currentMap == 1 && map == gp.currentMap){
                             helper = 116;
+                            System.out.println(filePath + ": map loaded");
+                            System.out.println("map:" + map);
                         } else
                         if (gp.currentMap == 2 && map == gp.currentMap){
                             helper = 155;
-                        } else {
-
+                            System.out.println(filePath + ": map loaded");
+                            System.out.println("map:" + map);
+                        } else
+                        if (gp.currentMap == 3 && map == gp.currentMap){
+                            System.out.println(filePath + ": map loaded");
+                            System.out.println("map:" + map);
+                            helper = 214;
                         }
+
                         int num = Integer.parseInt(numbers[col]);
                         mapTileNum[map][col][row] = num + helper;
                         col++;
@@ -134,6 +169,7 @@ public class TileManager {
                         col = 0;
                         row++;
                     }
+
                 }
 
 

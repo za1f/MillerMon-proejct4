@@ -1,8 +1,8 @@
 package Main;
 import jdk.jfr.Event;
 import tile.TileManager;
-
 import java.awt.*;
+import java.util.Timer;
 
 
 public class EventHandler {
@@ -11,6 +11,7 @@ public class EventHandler {
 
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
+    int tempMap, tempCol, tempRow;
 
     public EventHandler(GamePanel gp){
         this.gp = gp;
@@ -53,32 +54,58 @@ public class EventHandler {
             if (hit(0,8,5,"any") == true){
                 Color color = new Color(66,66,66);
                 gp.setBackground(color);
-                teleport(1,15,9);
+
+
                 gp.stopMusic();
+                teleport(1,15,9);
+
                 gp.playMusic(3);
+
             }
             else if (hit(1,16,9,"any") == true || hit(1,17,9,"any") == true || hit(1,16,8,"any") == true || hit(1,17,8,"any") == true ){
                 Color color = new Color(171,222,98);
                 gp.setBackground(color);
-                teleport(0,8,5);
+
+
                 gp.stopMusic();
+                teleport(0,8,6);
                 gp.playMusic(1);
+
             } else if (hit(0,17,5,"any") == true){
                 Color color = new Color(66,66,66);
                 gp.setBackground(color);
-                teleport(2,11, 15);
+
+
                 gp.stopMusic();
+                teleport(2,11, 14);
                 gp.playMusic(8);
-            } else if (hit(2,11,15,"any") == true || hit(2, 12, 15, "any") == true){
+
+            } else if (hit(2,11,15,"any") == true || hit(2, 12, 15, "any") == true || (hit(2,11,15,"any") == true && hit(2, 12, 15, "any") == true)){
                 Color color = new Color(171,222,98);
                 gp.setBackground(color);
-                teleport(0,17, 5);
+
+
                 gp.stopMusic();
+                teleport(0,17, 6);
+                gp.playMusic(1);
+
+            }else if (hit(0, 6, 13, "any") == true){
+
+                Color color = new Color(66,66,66);
+                gp.setBackground(color);
+
+                gp.stopMusic();
+                teleport(3,9,10);
+                gp.playMusic(9);
+
+            }else if (hit(3, 9, 11, "any") == true || hit(3, 10, 11, "any") == true ){
+                Color color = new Color(171,222,98);
+                gp.setBackground(color);
+
+                gp.stopMusic();
+                teleport(0,6,14);
                 gp.playMusic(1);
             }
-
-
-
         }
 
     }
@@ -111,11 +138,10 @@ public class EventHandler {
     }
 
     public void teleport(int map, int col, int row){
-        gp.currentMap = map;
-        gp.player.worldX = gp.tileSize*col;
-        gp.player.worldY = gp.tileSize * row;
-        previousEventX = gp.player.worldX;
-        previousEventY = gp.player.worldY;
-        canTouchEvent = false;
+        gp.gameState = gp.transitionState;
+
+        tempMap = map;
+        tempCol = col;
+        tempRow = row;
     }
 }
