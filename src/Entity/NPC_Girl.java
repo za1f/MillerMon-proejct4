@@ -53,7 +53,7 @@ public class NPC_Girl extends Entity{
         dialogues[0][5] = "You  go  there  to  buy  stuff  with  the \n money  you  earn  from  trainer  battles.";
         dialogues[0][6] = "And that  red  one  is  the  Poké-Center.";
         dialogues[0][7] = "You  go  there  to  heal  your  Pokémon \n after  battle.";
-        dialogues[0][7] = "Now  get  lost  loser.";
+        dialogues[0][8] = "Now  get  lost  loser.";
 
         dialogues[1][0] = "Oh nice i see you've picked *BLANK* as your first pokemon";
         dialogues[1][1] = "Anyways, you should probably begin your journey now";

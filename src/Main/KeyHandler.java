@@ -45,7 +45,9 @@ public class KeyHandler implements KeyListener {
                     gp.playMusic(10);
                 }
                 if (gp.ui.commandNum == 1) {
-                    //add later
+                    String redText = "\u001B[31m****THIS DOES ABSOLUTELY NOTHING****\u001B[0m";
+                    System.out.println(redText);
+                    gp.ui.commandNum = 0;
                 }
                 if (gp.ui.commandNum == 2){
                     System.exit(0);
