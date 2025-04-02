@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
+    Sound pauseMusic = new Sound();
     Sound se = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
@@ -207,6 +208,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void stopSE(){
         se.stop();
+    }
+
+    public void playPauseMusic(){
+        pauseMusic.setFile(12);
+        pauseMusic.play();
+    }
+    public void stopPauseMusic(){
+        pauseMusic.stop();
     }
 
 }

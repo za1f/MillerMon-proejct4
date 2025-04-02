@@ -105,6 +105,23 @@ public class EventHandler {
                 gp.stopMusic();
                 teleport(0,6,14);
                 gp.playMusic(1);
+            }else if (hit(0, 16, 13, "any") == true){
+
+                Color color = new Color(66,66,66);
+                gp.setBackground(color);
+
+                gp.stopMusic();
+                teleport(4,10,12);
+                gp.playMusic(11);
+
+            }else if (hit(4, 10, 13, "any") == true){
+
+                Color color = new Color(171,222,98);
+                gp.setBackground(color);
+
+                gp.stopMusic();
+                teleport(0,16,14);
+                gp.playMusic(1);
             }
         }
 

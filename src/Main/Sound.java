@@ -24,6 +24,9 @@ Sound {
         soundURL[8] = getClass().getResource("/sound/lab.wav");
         soundURL[9] = getClass().getResource("/sound/pokemoncenter.wav");
         soundURL[10] = getClass().getResource("/sound/noSilenceHome.wav");
+        soundURL[11] = getClass().getResource("/sound/mart.wav");
+        soundURL[12] = getClass().getResource("/sound/pauseMusic.wav");
+
     }
 
     public void setFile(int i){

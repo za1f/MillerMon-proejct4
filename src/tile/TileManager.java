@@ -19,12 +19,13 @@ public class TileManager {
     public TileManager(GamePanel gp){
 
         this.gp = gp;
-        tile = new Tile[268];
+        tile = new Tile[350];
         mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
         loadMap(0, "/maps/town1.txt");
         loadMap(2, "/maps/lab.txt");
         loadMap(3, "/maps/pokeCenter.txt");
+        loadMap(4, "/maps/mart.txt");
         loadMap(1, "/maps/startRoom.txt");
 
     }
@@ -112,6 +113,26 @@ public class TileManager {
 
             }
 
+            for (int i = 268; i < 323; i++){
+                String file;
+                String zeros;
+                if (i < 277){
+                    zeros = "0";
+                } else {
+                    zeros = "";
+                }
+
+                file = "/martTiles/mart_" + zeros + (i - 267) + ".png";
+
+                tile[i] = new Tile();
+                tile[i].image = ImageIO.read(getClass().getResourceAsStream(file));
+                if (i == 268 || i == 299 || i == 300 || i == 301 || i == 302 || i == 295 || i == 285 || i == 278 || i == 279 || i == 280 || i == 282 || i == 281 || i == 276 || i == 287 || i == 288 || i == 289 || i == 313 || i == 314 || i == 303 || i == 304 || i == 305 || i == 306 || i == 307 || i == 308 || i == 315 || i == 316 || i == 317)
+                {
+                    tile[i].collison = true;
+                }
+
+            }
+
 
 
 
@@ -159,6 +180,11 @@ public class TileManager {
                             System.out.println(filePath + ": map loaded");
                             System.out.println("map:" + map);
                             helper = 214;
+                        } else
+                        if (gp.currentMap == 4 && map == gp.currentMap){
+                            System.out.println(filePath + ": map loaded");
+                            System.out.println("map:" + map);
+                            helper = 267;
                         }
 
                         int num = Integer.parseInt(numbers[col]);

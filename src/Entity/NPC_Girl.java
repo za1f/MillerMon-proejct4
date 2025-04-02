@@ -9,6 +9,7 @@ import java.util.Random;
 public class NPC_Girl extends Entity{
 
     int count = 0;
+
     public NPC_Girl(GamePanel gp){
         super(gp);
 
@@ -44,12 +45,19 @@ public class NPC_Girl extends Entity{
     }
 
     public void setDialogue(){
-        dialogues[0] = "Hey  there  hot  stuff.";
-        dialogues[1] = "Oh,  you  want  to  know  about  this  town?";
-        dialogues[2] = "The  building  with  the  gray  roof  is \n Professor  Hazel's  lab.";
-        dialogues[3] = "That  red  one  is  the  PokeCenter.";
-        dialogues[4] = "And  that  blue  one  is  the  PokeShop.";
-        dialogues[5] = "Now get lost loser.";
+        dialogues[0][0] = "Hey  there  hot  stuff.";
+        dialogues[0][1] = "Oh,  you  want  to  know  about  this  town?";
+        dialogues[0][2] = "The  building  with  the  gray  roof  is \n Professor  Hazel's  lab.";
+        dialogues[0][3] = "You  should  probably  go  there  to  get \n your  first  Pokémon.";
+        dialogues[0][4] = "That  blue  one  is  the  Poké-Mart.";
+        dialogues[0][5] = "You  go  there  to  buy  stuff  with  the \n money  you  earn  from  trainer  battles.";
+        dialogues[0][6] = "And that  red  one  is  the  Poké-Center.";
+        dialogues[0][7] = "You  go  there  to  heal  your  Pokémon \n after  battle.";
+        dialogues[0][7] = "Now  get  lost  loser.";
+
+        dialogues[1][0] = "Oh nice i see you've picked *BLANK* as your first pokemon";
+        dialogues[1][1] = "Anyways, you should probably begin your journey now";
+        dialogues[1][2] = "Head over to the bottom right and enter ROUTE 1";
     }
     public void setAction(){
 
@@ -76,28 +84,9 @@ public class NPC_Girl extends Entity{
 
     }
     public void speak(){
-        super.speak();
-        if (count == 0){
-            gp.stopSE();
-            gp.playSE(6);
-            count++;
-        }else if (count == 1){
-            gp.stopSE();
-            gp.playSE(6);
-            count++;
-        } else if (count == 2){
-            gp.stopSE();
-            gp.playSE(7);
-            count++;
-        } else if (count == 3 || count == 4){
-            gp.stopSE();
-            gp.playSE(7);
-            count++;
-        } else {
-            gp.stopSE();
-            gp.playSE(6);
-            count = 0;
-        }
+        facePlayer();
+        startDialogue(this,dialogueSet);
+
     }
 
 

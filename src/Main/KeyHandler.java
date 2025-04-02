@@ -74,6 +74,7 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_P){
                 gp.gameState = gp.pauseState;
                 gp.stopMusic();
+                gp.playPauseMusic();
 
             }
             if(code == KeyEvent.VK_ENTER){
@@ -96,13 +97,13 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_P){
                 gp.gameState = gp.playState;
                 gp.pauseMusic();
-
+                gp.stopPauseMusic();
             }
         }
         //dialogue state
         else if (gp.gameState == gp.dialogueState){
             if (code == KeyEvent.VK_ENTER){
-                gp.gameState = gp.playState;
+                enterPressed = true;
             }
         }
     }
