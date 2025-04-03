@@ -19,9 +19,11 @@ public class AssetSetter {
     }
     public void setNPC(){
         int mapNum = 0;
-        gp.npc[mapNum][0] = new NPC_Girl(gp);
-        gp.npc[mapNum][0].worldX = gp.tileSize * 10;
-        gp.npc[mapNum][0].worldY = gp.tileSize * 7;
+
+        //gp.npc[# of map they appear][which npc]
+        gp.npc[0][0] = new NPC_Girl(gp);
+        gp.npc[0][0].worldX = gp.tileSize * 2;
+        gp.npc[0][0].worldY = gp.tileSize * 2;
     }
 
 }
