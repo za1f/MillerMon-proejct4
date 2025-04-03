@@ -91,6 +91,10 @@ public class Player extends Entity {
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
+            //check encounter pokemon collision
+            wildEncounter = false;
+            gp.wPokemon.pokeEncounter(this);
+
             //check obj collision
             int objIndex = gp.cChecker.checkObj(this, true);
             pickUpPoke(objIndex);
@@ -116,6 +120,14 @@ public class Player extends Entity {
                     case "right":
                         worldX += speed;
                         break;
+                }
+            }
+
+            if (wildEncounter == true){
+                int rand = (int) (Math.random() * 120) + 1;
+                if (rand == 60){
+                    System.out.println("You've found a pokemon");
+                    battle();
                 }
             }
 
@@ -168,6 +180,12 @@ public class Player extends Entity {
             gp.keyH.enterPressed = false;
         }
     }
+
+    public void battle(){
+        gp.gameState = gp.battleTransitionState;
+    }
+
+
 
     public void draw(Graphics2D g2) {
         BufferedImage image = null;

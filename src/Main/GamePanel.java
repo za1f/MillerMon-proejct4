@@ -44,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+    public WildPokemon wPokemon = new WildPokemon(this);
 
     Thread gameThread;
 
@@ -59,6 +60,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int transitionState = 4;
+    public final int battleState = 5;
+    public final int battleTransitionState = 6;
 
 
     Color color = new Color(66,66,66);  //171,222,98)

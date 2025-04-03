@@ -51,6 +51,9 @@ public class TileManager {
                 {
                     tile[i].collison = true;
                 }
+                if (i == 5){
+                    tile[i].encounter = true;
+                }
             }
 
             for (int i = 117; i < 156; i++){

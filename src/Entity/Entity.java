@@ -22,6 +22,7 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
 
     public boolean collisionOn = false;
+    public boolean wildEncounter = false;
 
     public int actionLockCounter = 0;
 
