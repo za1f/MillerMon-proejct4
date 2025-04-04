@@ -103,11 +103,46 @@ public class KeyHandler implements KeyListener {
             }
         }
         //dialogue state
-        else if (gp.gameState == gp.dialogueState){
+        else if (gp.gameState == gp.dialogueState || gp.gameState == gp.dialogueStateProf){
             if (code == KeyEvent.VK_ENTER){
                 enterPressed = true;
+
+            }
+            //selectign starter
+        } else if (gp.gameState == gp.selectionState) {
+            if (code == KeyEvent.VK_ENTER){
+                enterPressed = true;
+                if (gp.ui.selectNum == 1 && enterPressed){
+
+
+                    gp.ui.textS = "Froakie has been selected!";
+                    gp.player.direction = "down";
+                } else if (gp.ui.selectNum == 0 && enterPressed){
+                    gp.ui.textS = "Torchic has been selected!";
+                } else if (gp.ui.selectNum == 2 && enterPressed){
+                    gp.ui.textS = "Rowlet has been selected!";
+                }
+            } else if (code == KeyEvent.VK_A){
+                if (gp.ui.selectNum == 1){
+                    gp.ui.selectNum = 0;
+                } else if (gp.ui.selectNum == 2){
+                    gp.ui.selectNum = 1;
+                } else if (gp.ui.selectNum == 0){
+                    gp.ui.selectNum = 2;
+                }
+
+            } else if (code == KeyEvent.VK_D){
+                if (gp.ui.selectNum == 1){
+                    gp.ui.selectNum = 2;
+                } else if (gp.ui.selectNum == 2){
+                    gp.ui.selectNum = 0;
+                } else if (gp.ui.selectNum == 0){
+                    gp.ui.selectNum = 1;
+                }
             }
         }
+
+
     }
 
     @Override

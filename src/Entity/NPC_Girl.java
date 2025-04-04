@@ -86,7 +86,6 @@ public class NPC_Girl extends Entity{
     public void speak(){
         facePlayer();
         startDialogue(this,dialogueSet);
-
     }
 
 

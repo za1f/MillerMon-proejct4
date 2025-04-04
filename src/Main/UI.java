@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.function.BiFunction;
 
 public class UI {
     public Entity npc;
@@ -19,7 +20,7 @@ public class UI {
     boolean t1 = true, t2 = false, t3 = false;
     int circle = 0;
     boolean rect = false;
-
+    int colorN = 0;
 
     public boolean messageOn = false;
     public String message = "";
@@ -32,7 +33,14 @@ public class UI {
     int radius = 50; // Initial radius
     boolean playMusic = false;
     int rectCount = 0;
-
+    boolean firstChoice = true;
+    int startTran = 0;
+    BufferedImage startT;
+    BufferedImage startR;
+    BufferedImage startF;
+    public int selectNum = 1;
+    BufferedImage arrow;
+    public String textS = "Choose  a  starter...";
 
     public UI(GamePanel gp){
         this.gp = gp;
@@ -75,6 +83,21 @@ public class UI {
         if (gp.gameState == gp.battleTransitionState){
             drawBattleTransition();
 
+        }
+        if (gp.gameState == gp.choiceState){
+            trans2();
+        }
+        if (gp.gameState == gp.dialogueStateProf){
+            profDialogue();
+        }
+        if (gp.gameState == gp.choiceStateTrans){
+            choiceTrans();
+        }
+        if (gp.gameState == gp.selectionState){
+            starters();
+        }
+        if (gp.gameState == gp.endStateStart){
+            drawTransitionEnd();
         }
     }
 
@@ -334,4 +357,180 @@ public class UI {
         }
 
     }
+
+    public void profDialogue(){
+        //window
+        int x = gp.tileSize;
+        int y = gp.tileSize * 8;
+        int width = gp.screenWidth - (gp.tileSize* 2);
+        int height = gp.tileSize*3;
+
+        drawSubWindow(x, y, width, height);
+        Color textC = new Color(160, 70, 73);
+        g2.setColor(textC);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 21));
+        x+= gp.tileSize;
+        y+= gp.tileSize;
+
+        if (npc.dialogues[npc.dialogueSet][npc.dialogueIndex] != null){
+
+            //currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
+            char character[] = npc.dialogues[npc.dialogueSet][npc.dialogueIndex].toCharArray();
+
+            if (charIndex < character.length){
+                String s = String.valueOf(character[charIndex]);
+                combinedText = combinedText + s;
+                currentDialogue = combinedText;
+                charIndex++;
+            }
+
+            if (gp.keyH.enterPressed == true){
+
+                charIndex = 0;
+                combinedText = "";
+
+                if (gp.gameState == gp.dialogueStateProf){
+                    npc.dialogueIndex++;
+                    gp.keyH.enterPressed = false;
+                }
+            }
+        }
+        else {
+            npc.dialogueIndex = 0;
+            if (gp.gameState == gp.dialogueStateProf && firstChoice){
+                gp.gameState = gp.choiceStateTrans;
+                firstChoice = false;
+            } else {
+                gp.gameState = gp.playState;
+            }
+        }
+
+
+
+        for (String line : currentDialogue.split("\n")){
+            g2.drawString(line,x,y);
+            y+= 40;
+        }
+    }
+
+    public void trans2(){
+        g2.setColor(new Color(0 + (colorN*5),0 + (colorN*5),0 + (colorN*5)));
+        g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
+        colorN += 1;
+        if (colorN == 51){
+            gp.gameState = gp.selectionState;
+            colorN = 0;
+        }
+
+    }
+
+    public void choiceTrans(){
+        g2.setColor(Color.black);
+        g2.fillRect(0,0,0 + (startTran * 5), gp.screenHeight/8);
+        g2.fillRect(gp.screenWidth - (startTran * 5),gp.screenHeight / 8, 0 + (startTran * 5), gp.screenHeight/8);
+        g2.fillRect(0,gp.screenHeight/4,0 + (startTran * 5), gp.screenHeight/8);
+        g2.fillRect(gp.screenWidth - (startTran * 5),(gp.screenHeight / 8) * 3, 0 + (startTran * 5), gp.screenHeight/8);
+        g2.fillRect(0,gp.screenHeight/2,0 + (startTran * 5), gp.screenHeight/8);
+        g2.fillRect(gp.screenWidth - (startTran * 5),(gp.screenHeight / 8) * 5, 0 + (startTran * 5), gp.screenHeight/8);
+        g2.fillRect(0,(gp.screenHeight/4) * 3,0 + (startTran * 5), gp.screenHeight/8);
+        g2.fillRect(gp.screenWidth - (startTran * 5),(gp.screenHeight / 8) * 7, 0 + (startTran * 5), gp.screenHeight/8);
+        startTran+= 2;
+        if (startTran == 200){
+            gp.gameState = gp.choiceState;
+            startTran = 0;
+        }
+    }
+
+    public void starters(){
+        g2.setColor(new Color(255,255,255));
+        g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
+        try {
+            startT = ImageIO.read(getClass().getResourceAsStream("/pokemon/torchicSTART.png"));
+            startF = ImageIO.read(getClass().getResourceAsStream("/pokemon/froakieSTART.png"));
+            startR = ImageIO.read(getClass().getResourceAsStream("/pokemon/rowletSTART.png"));
+            arrow = ImageIO.read(getClass().getResourceAsStream("/menuImages/selectArrow.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int scaleT = 2;
+        int scaleF = 2;
+        int scaleR = 2;
+        g2.drawImage(startT, 95, (gp.screenHeight/2 - 48) - 95, 59* scaleT ,96*scaleT,null);
+        g2.drawImage(startF, 295, (gp.screenHeight/2) - 100, 64*scaleF,74*scaleF,null);
+        g2.drawImage(startR, 495, (gp.screenHeight/2) - 100, 92*scaleR,72*scaleR,null);
+
+        starterText();
+        if (selectNum == 1){
+            g2.drawImage(arrow, 345,(gp.screenHeight/2) - 150, 48,48, null);
+        } else if (selectNum == 2){
+            g2.drawImage(arrow, 590,(gp.screenHeight/2) - 160, 48,48, null);
+        } else if (selectNum == 0){
+            g2.drawImage(arrow, 115,(gp.screenHeight/2) - 180, 48,48, null);
+        }
+
+
+
+    }
+
+
+    public void starterText(){
+        int x = gp.tileSize;
+        int y = gp.tileSize * 8;
+        int width = gp.screenWidth - (gp.tileSize* 2);
+        int height = gp.tileSize*3;
+
+        drawSubWindow(x, y, width, height);
+        Color textC = new Color(160, 70, 73);
+        g2.setColor(textC);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 21));
+        x+= gp.tileSize;
+        y+= gp.tileSize;
+
+        if (textS != null){
+
+            char character[] = textS.toCharArray();
+
+            if (charIndex < character.length){
+                String s = String.valueOf(character[charIndex]);
+                combinedText = combinedText + s;
+                currentDialogue = combinedText;
+                charIndex++;
+            }
+
+            if (gp.keyH.enterPressed == true){
+
+                charIndex = 0;
+                combinedText = "";
+
+                if (gp.gameState == gp.selectionState){
+                    gp.keyH.enterPressed = false;
+                }
+            }
+        }
+        else {
+            if (gp.gameState == gp.selectionState){
+                gp.gameState = gp.playState;
+            }
+        }
+
+
+
+        for (String line : currentDialogue.split("\n")){
+            g2.drawString(line,x,y);
+            y+= 40;
+        }
+    }
+
+    public void drawTransitionEnd(){
+        counter++;
+        g2.setColor(new Color(0,0,0, counter *5));
+        g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
+        if (counter == 50){
+            counter = 0;
+            gp.gameState = gp.playState;
+        }
+    }
+
+
+
 }
