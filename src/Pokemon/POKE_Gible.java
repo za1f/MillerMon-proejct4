@@ -35,10 +35,10 @@ public class POKE_Gible extends Pokemon {
     }
 
     public void setMoveSet(){
-        moveSet[0] = new Moves("bug","Dragon Claw", 25, 80, false,0,4);
-        moveSet[1] = new Moves("bug","Bite", 30, 60, false,1,1);
+        moveSet[0] = new Moves("bug","Outrage", 25, 130, false,0,4);
+        moveSet[1] = new Moves("bug","Fire Blast", 30, 110, false,1,1);
         moveSet[2] = new Moves("normal","Bulldoze", 20, 60, false,0,1);
-        moveSet[3] = new Moves("Dragon Rush","Dragon Rush",15,100,false,0,1);
+        moveSet[3] = new Moves("Dragon Rush","Bite",15,60,false,0,1);
     }
 
 
