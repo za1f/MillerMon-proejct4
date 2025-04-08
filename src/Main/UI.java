@@ -1259,6 +1259,8 @@ public class UI {
                                             mTimer++;
                                         } else {
                                             outPoke.levelUp();
+                                            gp.stopMusic();
+                                            gp.playMusic(1);
                                             gp.gameState = gp.playState;
                                             oTimer = 0;
                                             cTimer = 0;
@@ -1269,7 +1271,6 @@ public class UI {
                                             damageDone = true;
                                             ranM = (int) (Math.random() * 4);
                                             damageRec = true;
-                                            gp.stopMusic();
                                             battleChoice = 0;
                                             bCursX = 0;
                                             bCursY = 0;

@@ -18,6 +18,13 @@ public class POKE_Gible extends Pokemon {
     public Moves[] moveSet = new Moves[4];
     int hp = 256;
 
+    public POKE_Gible(GamePanel gp){
+        super(gp);
+        setImages();
+        setStats();
+        setMoveSet();
+    }
+
     public int hp(){
         return hp;
     }
@@ -42,12 +49,6 @@ public class POKE_Gible extends Pokemon {
     }
 
 
-    public POKE_Gible(GamePanel gp){
-        super(gp);
-        setImages();
-        setStats();
-        setMoveSet();
-    }
 
     @Override
     public void setImages(){
