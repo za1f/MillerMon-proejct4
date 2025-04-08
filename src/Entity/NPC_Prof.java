@@ -62,6 +62,7 @@ public class NPC_Prof extends Entity{
         dialogues[0][3] = "Where'd  she  go?  I  have  no  clue.";
         dialogues[0][4] = "But  i'm  guessing  you're  here  to  get \n your  first  Pokémon?";
         dialogues[0][5] = "Alrighty  then,  choose  wisely!";
+
     }
 
 

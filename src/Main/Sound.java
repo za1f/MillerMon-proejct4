@@ -27,6 +27,8 @@ Sound {
         soundURL[11] = getClass().getResource("/sound/mart.wav");
         soundURL[12] = getClass().getResource("/sound/pauseMusic.wav");
         soundURL[13] = getClass().getResource("/sound/wildBattle.wav");
+        soundURL[14] = getClass().getResource("/sound/respawn.wav");
+
 
     }
 

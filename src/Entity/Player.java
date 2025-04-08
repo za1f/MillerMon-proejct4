@@ -2,19 +2,27 @@ package Entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
+import Pokemon.Pokemon;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import Pokemon.*;
 public class Player extends Entity {
 
     KeyHandler keyH;
+    public Pokemon randPoke = null;
 
     public int screenX;
     public int screenY;
     int standCounter = 0;
+    Pokemon encounter = null;
+
+
+    public Pokemon[] team = new Pokemon[6];
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -33,6 +41,7 @@ public class Player extends Entity {
 
         setDefaultValues();
         getPlayerImage();
+        //setTeam();
     }
 
     public void setDefaultValues() {
@@ -47,8 +56,8 @@ public class Player extends Entity {
             worldY = gp.tileSize * 10;
         }
 
-        speed = 4;
-        direction = "down";
+        speed = 7;
+        direction = "right";
     }
 
     public void getPlayerImage() {
@@ -123,11 +132,15 @@ public class Player extends Entity {
                 }
             }
 
-            if (wildEncounter == true){
-                int rand = (int) (Math.random() * 120) + 1;
+            if (wildEncounter == true && team[0] != null){
+                int rand = (int) (Math.random() * 100) + 1;
                 if (rand == 60){
-                    System.out.println("You've found a pokemon");
-                    battle();
+                    encounter = randPoke();
+                    if (encounter != null){
+                        encounter.testInfo();
+                        battle();
+                    }
+
                 }
             }
 
@@ -240,4 +253,26 @@ public class Player extends Entity {
         }
         g2.drawImage(image, screenX, screenY, 48, 48, null);
     }
+
+    public Pokemon randPoke(){
+        int randomP = (int) (Math.random() * 4) + 1;
+        Pokemon rand = null;
+        if (randomP == 1){
+            rand = new POKE_Eevee(gp);
+        } else if (randomP == 2){
+             rand = new POKE_Scyther(gp);
+        }else if (randomP == 3){
+            rand = new POKE_Gible(gp);
+        }else if (randomP == 4){
+            rand = new POKE_Pikachu(gp);
+        }
+
+
+
+        randPoke = rand;
+        return rand;
+    }
+    public void setTeam(){
+    }
+
 }

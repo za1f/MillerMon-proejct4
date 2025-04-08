@@ -53,11 +53,10 @@ public class NPC_Girl extends Entity{
         dialogues[0][5] = "You  go  there  to  buy  stuff  with  the \n money  you  earn  from  trainer  battles.";
         dialogues[0][6] = "And that  red  one  is  the  Poké-Center.";
         dialogues[0][7] = "You  go  there  to  heal  your  Pokémon \n after  battle.";
-        dialogues[0][8] = "Now  get  lost  loser.";
+        dialogues[0][8] = "I  also  heal  your  Pokémon!";
+        dialogues[0][9] = "Now  get  lost  loser.";
 
-        dialogues[1][0] = "Oh nice i see you've picked *BLANK* as your first pokemon";
-        dialogues[1][1] = "Anyways, you should probably begin your journey now";
-        dialogues[1][2] = "Head over to the bottom right and enter ROUTE 1";
+
     }
     public void setAction(){
 
@@ -84,6 +83,25 @@ public class NPC_Girl extends Entity{
 
     }
     public void speak(){
+        if (gp.player.team[0] != null){
+            gp.player.team[0].heal();
+        }
+        if (gp.player.team[1] != null){
+            gp.player.team[1].heal();
+        }
+        if (gp.player.team[2] != null){
+            gp.player.team[2].heal();
+        }
+        if (gp.player.team[3] != null){
+            gp.player.team[3].heal();
+        }
+        if (gp.player.team[4] != null){
+            gp.player.team[4].heal();
+        }
+        if (gp.player.team[5] != null){
+            gp.player.team[5].heal();
+        }
+
         facePlayer();
         startDialogue(this,dialogueSet);
     }

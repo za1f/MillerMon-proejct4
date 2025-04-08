@@ -67,6 +67,10 @@ public class GamePanel extends JPanel implements Runnable {
     public final int choiceStateTrans = 9;
     public final int selectionState = 10;
     public final int endStateStart = 11;
+    public final int pokemonTeam = 12;
+    public final int postSelection = 13;
+    public final int wildBattle = 14;
+    public final int pcState = 15;
 
 
     Color color = new Color(66,66,66);  //171,222,98)
@@ -89,7 +93,6 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread = new Thread(this);
         gameThread.start();
     }
-
 
     @Override
     public void run(){
@@ -115,7 +118,7 @@ public class GamePanel extends JPanel implements Runnable {
                 drawCount++;
             }
             if (timer >= 1000000000){
-                //System.out.println("FPS: " + drawCount);
+
                 drawCount =0;
                 timer = 0;
             }
@@ -151,8 +154,6 @@ public class GamePanel extends JPanel implements Runnable {
             drawStart = System.nanoTime();
         }
 
-
-
         //TITLE SCREEN
         if (gameState == titleState){
             ui.draw(g2);
@@ -180,15 +181,12 @@ public class GamePanel extends JPanel implements Runnable {
             ui.draw(g2);
         }
 
-
-
-
         if (keyH.checkDrawTime == true){
-            long drawEnd = System.nanoTime();
-            long passed = drawEnd - drawStart;
-            g2.setColor(Color.white);
-            g2.drawString("Draw Time: " + passed, 10, 400);
-            System.out.println("Draw Time: " + passed);
+//            long drawEnd = System.nanoTime();
+//            long passed = drawEnd - drawStart;
+//            g2.setColor(Color.white);
+//            g2.drawString("Draw Time: " + passed, 10, 400);
+//            System.out.println("Draw Time: " + passed);
         }
 
         g2.dispose();
