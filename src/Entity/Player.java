@@ -137,7 +137,7 @@ public class Player extends Entity {
                 if (rand == 60){
                     encounter = randPoke();
                     if (encounter != null){
-                        encounter.testInfo();
+                        //encounter.testInfo();
                         battle();
                     }
 
